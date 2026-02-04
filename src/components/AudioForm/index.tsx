@@ -1,14 +1,21 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import type { FC } from "react"
 
-const AudioForm = () => {
+import type { Props } from "./types"
+import useMetadata from "../../hooks/useMetadata"
+
+const AudioForm: FC<Props> = ({ title: initial_title }) => {
     const [url, setUrl] = useState("")
     const [isLoaded, setIsLoaded] = useState(false)
-    const [title, setTitle] = useState("")
+    const [title, setTitle] = useState(initial_title)
     const [duration, setDuration] = useState(0)
+
+    const { metadata, error, getMetadata } = useMetadata()
 
     const handleUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUrl(e.target.value)
         setIsLoaded(false) // Reset loaded state when URL changes
+        getMetadata(e.target.value)
     }
 
     const handleAudioLoad = (e: React.SyntheticEvent<HTMLAudioElement, Event>) => {
@@ -20,7 +27,7 @@ const AudioForm = () => {
         setIsLoaded(false)
     }
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (isLoaded) {
             console.log({ url, title, duration })
@@ -28,8 +35,13 @@ const AudioForm = () => {
         }
     }
 
+    useEffect(() => {
+        console.log(metadata);
+    }, [metadata])
+
     return (
         <form onSubmit={handleSubmit} className="flex flex-col gap-4 bg-theme-800 p-6 rounded-xl">
+            <legend className="text-white text-sm font-semibold">{initial_title}</legend>
             <div className="flex flex-col gap-2">
                 <label className="text-white text-sm font-semibold">Audio URL</label>
                 <input

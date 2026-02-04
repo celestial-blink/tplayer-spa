@@ -5,15 +5,12 @@ import SectionSongs from './components/SectionSongs'
 import ListSongs from './components/ListSongs'
 import Controls from './components/Controls'
 
-import AudioForm from './components/AudioForm'
-
 function App() {
 
     return (
         <section className="flex flex-col md:flex-row bg-theme-950 border-b border-theme-800">
             <aside className='w-full md:w-2/5 lg:w-1/4 bg-theme-950 p-4 md:h-screen overflow-auto flex flex-col gap-4 md:sticky md:top-0'>
                 <Presentation />
-                <AudioForm />
                 <SectionSongs title="Ultimas canciones:" />
                 <SectionSongs title="Favoritas:" />
             </aside>
