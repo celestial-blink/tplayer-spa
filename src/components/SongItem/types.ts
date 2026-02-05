@@ -1,6 +1,5 @@
+import type { Song } from "../../services/LocalDb"
+
 export type Props = {
-    title: string,
-    duration: number,
-    image?: string,
-    create_at?: string,
+    song: Song
 }

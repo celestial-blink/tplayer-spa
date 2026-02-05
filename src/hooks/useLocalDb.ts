@@ -5,7 +5,7 @@ import { db, type Song } from "../services/LocalDb"
 const useLocalDb = () => {
 
     const [songs, setSongs] = useState<Song[]>([]);
-    const [error, setError] = useState<Error | null>(null);
+    const [error, setError] = useState<Error | null>(null)
 
     const [isPendingSongs, setIsPendingSongs] = useState(false);
 
