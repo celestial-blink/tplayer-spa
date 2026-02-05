@@ -1,10 +1,8 @@
-import { useRef } from "react"
-
 import AudioForm from "../AudioForm"
 
 const Controls = () => {
 
-    const ref = useRef<HTMLDialogElement>(null);
+
 
     return (
         <>
@@ -13,14 +11,12 @@ const Controls = () => {
                     <input type="search" className="w-full bg-theme-950 md:bg-theme-900 p-4 rounded-md outline-none" name="search" id="search" placeholder="Buscar" />
                 </fieldset>
                 <fieldset className="flex-1 sm:flex-none">
-                    <button type="button" className="w-full bg-sky-600 p-4 rounded-md cursor-pointer" onClick={() => ref.current?.showModal()}>
+                    <button type="button" className="w-full bg-sky-600 p-4 rounded-md cursor-pointer" onClick={handle_open_dialog}>
                         Agregar nuevo
                     </button>
                 </fieldset>
             </div>
-            <dialog className="fixed m-auto left-0 right-0 backdrop:bg-black/50 w-96" ref={ref} open={false}>
-                <AudioForm title="Agregar nuevo audio" />
-            </dialog>
+            <AudioForm title="Agregar nuevo audio" />
         </>
     )
 }

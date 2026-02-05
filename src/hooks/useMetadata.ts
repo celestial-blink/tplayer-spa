@@ -1,11 +1,11 @@
 import { useState } from "react"
-import { parseBlob } from "music-metadata"
+import { parseBlob, type IAudioMetadata } from "music-metadata"
 
 const useMetadata = () => {
-    const [metadata, setMetadata] = useState<any>(null)
+    const [metadata, setMetadata] = useState<IAudioMetadata | null>(null)
     const [error, setError] = useState<Error | null>(null)
 
-    const getMetadata = async (url: string) => {
+    const get_metadata = async (url: string) => {
         try {
             const response = await fetch(url)
             const blob = await response.blob()
@@ -16,7 +16,7 @@ const useMetadata = () => {
         }
     }
 
-    return { metadata, error, getMetadata }
+    return { metadata, error, get_metadata }
 }
 
 export default useMetadata
