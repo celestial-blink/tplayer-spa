@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 
 import useLocalDb from "../../hooks/useLocalDb"
 import SongItem from "../SongItem"
 
 const ListSongs = () => {
-    const { get_store_songs, songs, isPendingSongs } = useLocalDb()
+    const { getStoreSongs, songs, isPendingSongs } = useLocalDb()
 
     useEffect(() => {
-        get_store_songs();
+        getStoreSongs();
     }, [])
 
     return (

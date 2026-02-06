@@ -9,7 +9,7 @@ const useLocalDb = () => {
 
     const [isPendingSongs, setIsPendingSongs] = useState(false);
 
-    const get_store_songs = () => {
+    const getStoreSongs = () => {
         setIsPendingSongs(true);
         const tx = db?.transaction("songs", "readonly");
         const store = tx?.objectStore('songs');
@@ -26,7 +26,7 @@ const useLocalDb = () => {
         setIsPendingSongs(false);
     }
 
-    const add_song = (song: Song) => {
+    const addSong = (song: Song) => {
         const tx = db?.transaction("songs", "readwrite");
         const store = tx?.objectStore('songs');
         const result = store?.add(song);
@@ -40,7 +40,21 @@ const useLocalDb = () => {
         }
     }
 
-    const delete_song = (id: number) => {
+    const updateSong = (song: Song) => {
+        const tx = db?.transaction("songs", "readwrite");
+        const store = tx?.objectStore('songs');
+        const result = store?.put(song);
+
+        if (result) {
+            result.onsuccess = () => {
+                console.log("Canción actualizada");
+            }
+        } else {
+            setError(new Error("Error al actualizar la canción"));
+        }
+    }
+
+    const deleteSong = (id: number) => {
         const tx = db?.transaction("songs", "readwrite");
         const store = tx?.objectStore('songs');
         const result = store?.delete(id);
@@ -57,10 +71,11 @@ const useLocalDb = () => {
     return {
         songs,
         error,
-        get_store_songs,
+        getStoreSongs,
         isPendingSongs,
-        add_song,
-        delete_song
+        addSong,
+        deleteSong,
+        updateSong,
     }
 }
 

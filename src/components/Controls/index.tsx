@@ -4,7 +4,7 @@ import Dialog from "../Dialog"
 
 const Controls = () => {
 
-    const { open_dialog, open, close_dialog } = useDialog()
+    const { openDialog, open, closeDialog } = useDialog()
 
     return (
         <>
@@ -13,14 +13,14 @@ const Controls = () => {
                     <input type="search" className="w-full bg-theme-950 md:bg-theme-900 p-4 rounded-md outline-none" name="search" id="search" placeholder="Buscar" />
                 </fieldset>
                 <fieldset className="flex-1 sm:flex-none">
-                    <button type="button" className="w-full bg-sky-600 p-4 rounded-md cursor-pointer" onClick={() => open_dialog()}>
+                    <button type="button" className="w-full bg-sky-600 p-4 rounded-md cursor-pointer" onClick={() => openDialog()}>
                         Agregar nuevo
                     </button>
                 </fieldset>
             </div>
 
-            <Dialog open={open} on_close={() => close_dialog()}>
-                <AudioForm title="Agregar nuevo audio" on_submit={() => close_dialog()} />
+            <Dialog open={open} on_close={() => closeDialog()}>
+                <AudioForm title="Agregar nuevo audio" on_submit={() => closeDialog()} />
             </Dialog>
         </>
     )

@@ -15,8 +15,8 @@ const AudioForm: FC<Props> = ({ title: initial_title, on_submit }) => {
     const [image, setImage] = useState<string | undefined>(undefined)
     const [loadMetadata, setLoadMetadata] = useState(false);
 
-    const { metadata, error, get_metadata } = useMetadata()
-    const { add_song } = useLocalDb()
+    const { metadata, error, getMetadata } = useMetadata()
+    const { addSong } = useLocalDb()
 
     const handleUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUrl(e.target.value)
@@ -44,10 +44,10 @@ const AudioForm: FC<Props> = ({ title: initial_title, on_submit }) => {
         setIsLoaded(false)
     }
 
-    const handle_get_metadata = (event: MouseEvent<HTMLButtonElement>) => {
+    const handleGetMetadata = (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault()
         setLoadMetadata(true)
-        get_metadata(url)
+        getMetadata(url)
     }
 
     const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
@@ -55,7 +55,7 @@ const AudioForm: FC<Props> = ({ title: initial_title, on_submit }) => {
         if (isLoaded) {
             console.log({ url, title, duration, image })
 
-            add_song({
+            addSong({
                 title,
                 url,
                 duration,
@@ -80,7 +80,7 @@ const AudioForm: FC<Props> = ({ title: initial_title, on_submit }) => {
                         onChange={handleUrlChange}
                         placeholder="https://example.com/song.mp3"
                     />
-                    <button type="button" className="bg-theme-800 p-1 rounded-md hover:bg-slate-700 size-6 flex items-center justify-center absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer" onClick={handle_get_metadata}>
+                    <button type="button" className="bg-theme-800 p-1 rounded-md hover:bg-slate-700 size-6 flex items-center justify-center absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer" onClick={handleGetMetadata}>
                         <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" /><path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" /></svg>
                     </button>
                 </div>

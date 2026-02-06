@@ -5,7 +5,7 @@ const useMetadata = () => {
     const [metadata, setMetadata] = useState<IAudioMetadata | null>(null)
     const [error, setError] = useState<Error | null>(null)
 
-    const get_metadata = async (url: string) => {
+    const getMetadata = async (url: string) => {
         try {
             const response = await fetch(url)
             const blob = await response.blob()
@@ -16,7 +16,7 @@ const useMetadata = () => {
         }
     }
 
-    return { metadata, error, get_metadata }
+    return { metadata, error, getMetadata }
 }
 
 export default useMetadata
